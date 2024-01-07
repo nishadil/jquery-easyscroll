@@ -1,0 +1,156 @@
+/*
+ * EasyScroll : a scroll-tastic jQuery plugin 
+ * Inspired from jquery-simplyscroll 
+ *
+ * Dual licensed under the MIT licenses.
+ *
+ * Last revised: 07/01/2024
+ *
+ * Note : The original project on github (simplyscroll) was marked as lagecy and 
+ * we were not getting new updates on that, so we do some modification
+ * and make it available for all with new name.
+ *
+ */
+
+/* Default/Master classes 
+
+Example markup format (for horizontal scroller)
+Note all DIVs are generated and should not be hard-coded
+
+<div class="your-custom-class easy-scroll-container">
+	<div class="easy-scroll-btn easy-scroll-btn-left"></div>
+	<div class="easy-scroll-btn easy-scroll-btn-right"></div>
+	<div class="easy-scroll-clip">
+		<ul class="easy-scroll-list">
+			<li>...</li>
+			...
+		</ul>
+	</div>
+</div>
+
+
+*/
+
+.easy-scroll-container {position: relative;}
+
+/* Clip DIV - automatically generated */
+.easy-scroll-clip {position: relative;overflow: hidden;}
+
+/* UL/OL/DIV - the element that simplyScroll is inited on */
+.easy-scroll-list {overflow: hidden;margin: 0;padding: 0;list-style: none;}
+
+.easy-scroll-list li {padding: 0;margin: 0;list-style: none;}
+
+.easy-scroll-list li img {border: none;display: block;}
+
+.easy-scroll-btn {position: absolute;background-image: url(buttons.png);width: 42px;height: 44px;z-index: 3;cursor: pointer;}
+
+.easy-scroll-btn-left {left: 6px;bottom: 6px;background-position: 0 -44px;}
+
+.easy-scroll-btn-left.disabled {background-position: 0 0 !important;}
+
+.easy-scroll-btn-left:hover,
+.easy-scroll-btn-left:focus {background-position: 0 -88px;}
+
+.easy-scroll-btn-right {right: 6px;bottom: 6px;background-position: -84px -44px;}
+
+.easy-scroll-btn-right.disabled {background-position: -84px 0 !important;}
+
+.easy-scroll-btn-right:hover,
+.easy-scroll-btn-right:focus {background-position: -84px -88px;}
+
+.easy-scroll-btn-up {right: 6px;top: 6px;background-position: -126px -44px;}
+
+.easy-scroll-btn-up.disabled {background-position: -126px 0 !important;}
+
+.easy-scroll-btn-up:hover,
+.easy-scroll-btn-up:focus {background-position: -126px -88px;}
+
+.easy-scroll-btn-down {right: 6px;bottom: 6px;background-position: -42px -44px;}
+
+.easy-scroll-btn-down.disabled {background-position: -42px 0 !important;}
+
+.easy-scroll-btn-down:hover,
+.easy-scroll-btn-down:focus {background-position: -42px -88px;}
+
+.easy-scroll-btn-pause {right: 6px;bottom: 6px;background-position: -168px -44px;}
+
+.easy-scroll-btn-pause:hover,
+.easy-scroll-btn-pause:focus {background-position: -168px -88px;}
+
+.easy-scroll-btn-pause.active {background-position: -84px -44px;}
+
+.easy-scroll-btn-pause.active:hover,
+.easy-scroll-btn-pause.active:focus {background-position: -84px -88px;}
+
+/* Custom class modifications - override classees
+
+.easy-scroll is default
+
+*/
+
+/* Customisable base class for style override DIV */
+.easy-scroll {width: 576px;height: 200px;margin-bottom: 1em;}
+
+.easy-scroll .easy-scroll-clip {width: 576px;height: 200px;}
+
+.easy-scroll .easy-scroll-list {}
+
+.easy-scroll .easy-scroll-list li {float: left;width: 290px;height: 200px;}
+
+.easy-scroll .easy-scroll-list li img {}
+
+.easy-scroll .easy-scroll-btn {}
+
+.easy-scroll .easy-scroll-btn-left {}
+
+.easy-scroll .easy-scroll-btn-left.disabled {}
+
+.easy-scroll .easy-scroll-btn-left:hover {}
+
+.easy-scroll .easy-scroll-btn-right {}
+
+.easy-scroll .easy-scroll-btn-right.disabled {}
+
+.easy-scroll .easy-scroll-btn-right:hover {}
+
+.easy-scroll .easy-scroll-btn-up {}
+
+.easy-scroll .easy-scroll-btn-up.disabled {}
+
+.easy-scroll .easy-scroll-btn-up:hover {}
+
+.easy-scroll .easy-scroll-btn-down {}
+
+.easy-scroll .easy-scroll-btn-down.disabled {}
+
+.easy-scroll .easy-scroll-btn-down:hover {}
+
+
+
+/* Vertical scroller example */
+
+/* wider than clip to position buttons to side */
+.vert {width: 340px;height: 400px;margin-bottom: 1.5em;}
+
+.vert .easy-scroll-clip {width: 290px;height: 400px;}
+.vert .easy-scroll-list {}
+
+.vert .easy-scroll-list li {width: 290px;height: 200px;}
+
+.vert .easy-scroll-list li img {}
+.vert .easy-scroll-btn {}
+
+/* modified btn pos */
+.vert .easy-scroll-btn-up {right: 0;top: 0;}
+
+.vert .easy-scroll-btn-up.disabled {}
+.vert .easy-scroll-btn-up:hover {}
+/* modified btn pos */
+.vert .easy-scroll-btn-down {right: 0;top: 52px;}
+
+.vert .easy-scroll-btn-down.disabled {}
+
+.vert .easy-scroll-btn-down:hover {}
+
+/* NOTE left-right classes wouldn't be needed on vertical scroller */
