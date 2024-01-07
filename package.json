@@ -1,0 +1,34 @@
+{
+  "name": "jquery-easyscroll",
+  "version": "0.0.1",
+  "description": "A jQuery plugin for scrolling a set of images/elements easily",
+  "main": "src/jquery.easyscroll.js",
+  "style": "src/jquery.easyscroll.css",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nishadil/jquery-easyscroll.git"
+  },
+  "keywords": [
+    "easyscroll",
+    "jquery",
+    "scroll",
+    "simple",
+    "easyscroll",
+    "js",
+    "scroll",
+    "js",
+    "easyscroll"
+  ],
+  "author": "Nishadil.Dev <opensource@nishadil.dev>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nishadil/jquery-easyscroll/issues"
+  },
+  "homepage": "https://github.com/nishadil/jquery-easyscroll#readme",
+  "dependencies": {
+    "jquery": "^3.3.1"
+  }
+}
