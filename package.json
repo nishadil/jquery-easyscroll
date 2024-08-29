@@ -1,6 +1,6 @@
 {
   "name": "jquery-easyscroll",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A jQuery plugin for scrolling a set of images/elements easily",
   "main": "src/jquery.easyscroll.js",
   "style": "src/jquery.easyscroll.css",
