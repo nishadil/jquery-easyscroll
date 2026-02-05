@@ -31,18 +31,24 @@ You can install the `jquery-easyscroll` package using npm:
 npm install jquery-easyscroll
 ```
 
-Alternatively, you can include the plugin and CSS directly in your HTML file:
+This package publishes ESM, CommonJS, and UMD builds via the following entry points:
+
+- ESM: `dist/jquery.easyscroll.esm.js` (module-aware bundlers)
+- CommonJS: `dist/jquery.easyscroll.cjs` (Node/CommonJS)
+- UMD: `dist/jquery.easyscroll.umd.js` (browser globals)
+
+Alternatively, you can include the plugin and CSS directly in your HTML file (UMD build):
 
 ```html
 <link rel="stylesheet" href="path/to/jquery.easyscroll.css">
-<script src="path/to/jquery.easyscroll.min.js"></script>
+<script src="path/to/jquery.easyscroll.umd.js"></script>
 ```
 
 ## Usage
 
 After installing or including the plugin, you can use it in your project like this:
 
-### Basic Initialization
+### Basic Initialization (jQuery Plugin)
 
 ```javascript
 import EasyScroll from 'jquery-easyscroll';
@@ -60,6 +66,30 @@ $(document).ready(function() {
         // your options here
     });
 });
+```
+
+### CommonJS
+
+```javascript
+const EasyScroll = require('jquery-easyscroll');
+// or: const { default: EasyScroll } = require('jquery-easyscroll');
+
+$(document).ready(function() {
+    $('.your-selector').easyScroll();
+});
+```
+
+### Browser (UMD)
+
+```html
+<link rel="stylesheet" href="path/to/jquery.easyscroll.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="path/to/jquery.easyscroll.umd.js"></script>
+<script>
+    $(function() {
+        $('.your-selector').easyScroll();
+    });
+</script>
 ```
 
 ### Example Usage
@@ -95,7 +125,7 @@ new EasyScroll('.scrollable-content', {
 
 <link rel="stylesheet" href="path/to/jquery.easyscroll.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="path/to/jquery.easyscroll.min.js"></script>
+<script src="path/to/jquery.easyscroll.umd.js"></script>
 <script>
     $(document).ready(function() {
         new EasyScroll('.scrollable-content', {
@@ -183,6 +213,20 @@ This project is open-source and available under the [MIT License](LICENSE).
 ## Contribution
 
 We welcome contributions! If you have ideas or improvements, feel free to submit a pull request or open an issue.
+
+## Development
+
+Build:
+
+```bash
+npm run build
+```
+
+Test:
+
+```bash
+npm test
+```
 
 ## Credits
 
