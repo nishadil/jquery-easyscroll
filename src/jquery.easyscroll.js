@@ -108,15 +108,13 @@ class EasyScroll {
             }
 
             if (extra_wrap) {
-                this.$list = this.$list.wrap("<div></div>").parent().addClass("easy-scroll-list");
-
                 if (this.isHorizontal) {
-                    this.$list.children().css({
+                    this.$list.css({
                         float: "left",
                         width: total + "px"
                     });
                 } else {
-                    this.$list.children().css({
+                    this.$list.css({
                         height: total + "px"
                     });
                 }
@@ -128,9 +126,12 @@ class EasyScroll {
         if (!this.o.startOnLoad) {
             this.init();
         } else {
-            $(window).load(function () {
-                self.init();
-            });
+            const init = () => this.init();
+            if (document.readyState === 'complete') {
+                init();
+            } else {
+                $(window).on('load', init);
+            }
         }
     }
 
@@ -138,6 +139,9 @@ class EasyScroll {
         var self = this;
 
         this.$items = this.$list.children();
+        if (!this.$items.length) {
+            return;
+        }
         this.$clip = this.$list.parent(); //this is the element that scrolls
         this.$container = this.$clip.parent();
         this.$btnBack = $('.easy-scroll-back', this.$container);
@@ -157,6 +161,10 @@ class EasyScroll {
             this.moveBackClass = 'easy-scroll-btn-left';
             this.moveForwardClass = 'easy-scroll-btn-right';
             this.scrollPos = 'Left';
+        }
+
+        if (!this.itemMax || !isFinite(this.itemMax)) {
+            return;
         }
 
         this.posMin = 0;
@@ -361,6 +369,7 @@ class EasyScroll {
 
     moveForward() {
         const self = this;
+        this.movePause();
         this.movement = 'forward';
 
         if (this.trigger !== null) {
@@ -383,17 +392,19 @@ class EasyScroll {
                 self.resetPos();
             } else {
                 self.moveStop(self.movement);
+                return;
             }
 
             self.timestamp = timestamp;
             self.interval = requestAnimationFrame(frame);
         };
 
-        requestAnimationFrame(frame);
+        this.interval = requestAnimationFrame(frame);
     }
 
     moveBack() {
         const self = this;
+        this.movePause();
         this.movement = 'back';
 
         if (this.trigger !== null) {
@@ -413,13 +424,14 @@ class EasyScroll {
                 self.resetPos();
             } else {
                 self.moveStop(self.movement);
+                return;
             }
 
             self.timestamp = timestamp;
             self.interval = requestAnimationFrame(frame);
         };
 
-        requestAnimationFrame(frame);
+        this.interval = requestAnimationFrame(frame);
     }
 
     movePause() {
@@ -450,12 +462,22 @@ class EasyScroll {
     }
 
     resetPos(resetPos) {
-        this.$clip[0]['scroll' + this.scrollPos] = resetPos
-            ? resetPos
-            : this.resetPosition;
+        const nextPos = typeof resetPos === 'number' ? resetPos : this.resetPosition;
+        this.$clip[0]['scroll' + this.scrollPos] = nextPos;
     }
 
     // ... (additional methods and properties)
+}
+
+if ($ && $.fn && !$.fn.easyScroll) {
+    $.fn.easyScroll = function (options) {
+        return this.each(function () {
+            const $el = $(this);
+            if (!$el.data('easyScroll')) {
+                $el.data('easyScroll', new EasyScroll(this, options));
+            }
+        });
+    };
 }
 
 // Export the EasyScroll class
